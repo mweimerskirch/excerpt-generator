@@ -1,10 +1,10 @@
 export function createExcerpt(input: string, search: string, wordsAround: number, maximumLength: number) {
     let output = ''
 
-    // FIXME: escape "search" variable before putting it in the regex
+    // Escape "search" variable before putting it in the regex
+    search = escapeRegExpString(search)
 
     const regex = new RegExp('(?:((?:[^\\s.,;]+[\\s.,;]+){0,' + wordsAround + '})(\\b' + search + '\\b)((?:[\\s.,;]+[^\\s.,;]+){0,' + wordsAround + '}))', 'gmius');
-    console.log(regex)
 
     if (input.search(regex) === -1) {
         // Match not found, we'll return the maximum length, starting from the beginning
@@ -47,4 +47,8 @@ export function createExcerpt(input: string, search: string, wordsAround: number
     }
 
     return output;
+}
+
+function escapeRegExpString(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
