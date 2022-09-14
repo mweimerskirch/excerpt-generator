@@ -40,6 +40,9 @@ export function createExcerpt(input: string, search: string, wordsAround: number
             // console.log(excerpt)
 
             previousEnd = match.index + match[0].length
+
+            // If we've reached the maximum length, ignore the remaining matches
+            if (output.length >= maximumLength) break;
         }
 
         output += ' …'
