@@ -1,5 +1,5 @@
 export function createExcerpt(input: string, search: string, wordsAround: number, maximumLength: number) {
-    let excerpt = "";
+    let output = ''
 
     // FIXME: escape "search" variable before putting it in the regex
 
@@ -8,23 +8,42 @@ export function createExcerpt(input: string, search: string, wordsAround: number
     if (input.search(regex) === -1) {
         // Match not found, we'll return the maximum length, starting from the beginning
         if (input.length > maximumLength)
-            excerpt = input.substring(0, maximumLength - 2).trim() + ' …';
+            output = input.substring(0, maximumLength - 2).trim() + ' …';
         else
-            excerpt = input
+            output = input
     } else {
         const matches = input.matchAll(regex)
-        console.log(matches)
+        let previousEnd = 0
 
         // @ts-ignore
         for (const match of matches) {
             //console.log(`Found ${match[0]} start=${match.index} end=${match.index + match[0].length}.`);
-            excerpt = `${match[1]}<strong>${match[2]}</strong>${match[3]}`;
-            if (match.index > 0) excerpt = '… ' + excerpt;
+            let beginning = match[1]
+            let end = match[3]
 
-            excerpt += ' …'
-            console.log(excerpt)
+            // console.log(match.index)
+            // console.log(previousEnd)
+            if (match.index <= previousEnd) {
+                const overlap = previousEnd - match.index;
+                // console.log(overlap)
+                beginning = beginning.substring(overlap + 1);
+            } else if (match.index > 0) {
+                if (match.index == previousEnd + 1)
+                    beginning = ' ' + beginning
+                else
+                    beginning = '… ' + beginning
+            }
+
+            let excerpt = `${beginning}<strong>${match[2]}</strong>${end}`;
+            output += excerpt
+
+            // console.log(excerpt)
+
+            previousEnd = match.index + match[0].length
         }
 
+        output += ' …'
     }
-    return excerpt;
+
+    return output;
 }
