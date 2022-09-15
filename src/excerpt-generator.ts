@@ -4,7 +4,7 @@ export function createExcerpt(input: string, search: string, wordsAround: number
     // Escape "search" variable before putting it in the regex
     search = escapeRegExpString(search)
 
-    const regex = new RegExp('(?:((?:[^\\s.,;]+[\\s.,;]+){0,' + wordsAround + '})(\\b' + search + '\\b)((?:[\\s.,;]+[^\\s.,;]+){0,' + wordsAround + '}))', 'gmius');
+    const regex = new RegExp('(?:((?:[^\\s.,;#-]+[\\s.,;#-]+){0,' + wordsAround + '})(\\b' + search + '\\b)((?:[\\s.,;#-]+[^\\s.,;#-]+){0,' + wordsAround + '}))', 'gmius');
 
     if (input.search(regex) === -1) {
         // Match not found, we'll return the maximum length, starting from the beginning
