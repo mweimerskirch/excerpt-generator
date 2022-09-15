@@ -13,7 +13,6 @@ export function createExcerpt(input: string, search: string, wordsAround: number
         else
             output = input
     } else {
-        const matches = input.matchAll(regex)
         let previousEnd = 0
         let match;
 
@@ -24,7 +23,7 @@ export function createExcerpt(input: string, search: string, wordsAround: number
             let beginning = match[1]
             let end = match[3]
 
-            if (match.index <= previousEnd) {
+            if (match.index < previousEnd) {
                 const overlap = previousEnd - match.index;
                 beginning = beginning.substring(overlap + 1);
             } else if (match.index > 0) {
