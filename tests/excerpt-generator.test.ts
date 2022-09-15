@@ -24,7 +24,7 @@ describe('testing excerpt generation', () => {
         expect(createExcerpt(longInput, multipleMatchSearch, 5, 200)).toBe('… elit. Cras lobortis eros eget <strong>est</strong> vulputate, nec blandit nunc lacinia… non gravida pulvinar. Ut hendrerit, <strong>est</strong> nec consequat suscipit, erat nulla …');
     });
     test('multiple matches with overlap should return a longer excerpt without an ellipsis', () => {
-        expect(createExcerpt(longInput, multipleMatchWithOverlapSearch, 5, 200)).toBe('… nisi ultricies efficitur. Duis purus <strong>nibh</strong>, porta a dictum ut, dapibus… feugiat, turpis efficitur pellentesque rutrum, <strong>nibh</strong> magna tristique arcu, sed tinciduntdui turpis ut <strong>nibh</strong>. Duis commodo nec velit eget …');
+        expect(createExcerpt(longInput, multipleMatchWithOverlapSearch, 5, 200)).toBe('… nisi ultricies efficitur. Duis purus <strong>nibh</strong>, porta a dictum ut, dapibus… feugiat, turpis efficitur pellentesque rutrum, <strong>nibh</strong> magna tristique arcu, sed tincidunt dui turpis ut <strong>nibh</strong>. Duis commodo nec velit eget …');
     });
     test('match at beginning should not include ellipsis at the start', () => {
         expect(createExcerpt(longInput, matchAtBeginningSearch, 5, 200)).toBe('Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipiscing …');

@@ -25,7 +25,7 @@ export function createExcerpt(input: string, search: string, wordsAround: number
 
             if (match.index < previousEnd) {
                 const overlap = previousEnd - match.index;
-                beginning = beginning.substring(overlap + 1);
+                output = output.substring(0, output.length - overlap)
             } else if (match.index > 0) {
                 if (match.index == previousEnd + 1)
                     beginning = ' ' + beginning
